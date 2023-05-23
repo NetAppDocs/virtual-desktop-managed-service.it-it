@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: users.remove.html 
+summary: 'Rimozione dell"accesso utente in VDMS' 
+keywords:  
+---
+= Rimozione dell'accesso utente
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Rimozione di un utente
+
+.Nuove implementazioni di Active Directory (è stato creato un nuovo dominio Active Directory per VDMS)
+. Eliminare l'utente in VDMS
++
+.. Accedere all'area di lavoro, selezionare la scheda "Users & Groups" (utenti e gruppi), fare clic sui punti di azione accanto all'utente da eliminare, quindi fare clic su "Delete" (Elimina)image:users.remove01.png["900,900"]
+.. Viene visualizzata una finestra a comparsa con le opzioni Delay Deletion (ritardo eliminazione) e Delete from Directory (Elimina dalla directory)image:users.remove02.png["900,900"]
++
+... L'opzione Delay Deltion (eliminazione ritardo) attende 90 minuti prima di eliminare l'utente, consentendo l'annullamento del processo. Si consiglia di selezionare questa casella.
+... L'opzione Delete from Directory (Elimina dalla directory) elimina l'account utente di Active Directory. Questa casella deve essere selezionata.
+
+
+
+
+. Notificare a NetApp la rimozione dell'utente utilizzando uno dei metodi riportati di seguito
++
+.. Supporto via email: VDSsupport@netapp.com
+.. Assistenza telefonica: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portale di supporto VDMS"]
+
+
+
+
+.Implementazioni Active Directory esistenti (VDMS si sta connettendo a un Active Directory esistente)
+. Eliminare l'utente in VDMS
++
+.. Accedere all'area di lavoro, selezionare la scheda "Users & Groups" (utenti e gruppi), fare clic sui punti di azione accanto all'utente da eliminare, quindi fare clic su "Delete" (Elimina)image:users.remove01.png["900,900"]
+.. Viene visualizzata una finestra a comparsa con le opzioni Delay Deletion (ritardo eliminazione) e Delete from Directory (Elimina dalla directory)image:users.remove03.png["900,900"]
++
+... L'opzione Delay Deltion (eliminazione ritardo) attende 90 minuti prima di eliminare l'utente, consentendo l'annullamento del processo. Si consiglia di selezionare questa casella.
+... L'opzione Delete from Directory (Elimina dalla directory) elimina l'account utente di Active Directory. Si consiglia DI NON selezionare questa casella e di seguire il processo di eliminazione dell'account utente dell'organizzazione per eliminare l'account da Active Directory.
+
+
+
+
+. Notificare a NetApp la rimozione dell'utente utilizzando uno dei metodi riportati di seguito
++
+.. Supporto via email: VDSsupport@netapp.com
+.. Assistenza telefonica: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portale di supporto VDMS"]
+
+
+

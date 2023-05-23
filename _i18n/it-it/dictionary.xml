@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blocks>
+  <block id="78e405c2589d4cf70f6c45795aeb39d9" category="summary">Installazione delle applicazioni sugli host di sessione all'interno di un pool di host</block>
+  <block id="f312c749ffc217d197a80a28842c8749" category="doc">Installazione delle applicazioni sulle macchine virtuali host della sessione</block>
+  <block id="8a17bedfe2ee407739d807567dc8d643" category="section-title">Application Delivery Methodology</block>
+  <block id="8aa58a967207a06b5c55918c6518e17f" category="paragraph">Gli utenti possono accedere a qualsiasi applicazione installata sulla macchina virtuale host della sessione (SHVM) in cui è in esecuzione la sessione utente.</block>
+  <block id="beb5d87fe3526985d13cb57799fd1448" category="paragraph">Gli utenti vengono assegnati a un pool di SHVM ("pool di host") in base alla loro appartenenza a un gruppo di utenti. Ogni SHVM in quel pool di host si basa sulla stessa immagine della macchina virtuale, ha le stesse applicazioni e viene eseguito sulle stesse risorse della macchina virtuale. Ogni volta che un utente si connette, viene assegnato a SHVM nel proprio pool di host con il minor numero di sessioni utente correnti.</block>
+  <block id="6f19c28c9fc064fbf50be8c483387ef5" category="paragraph">Aggiungendo o rimuovendo applicazioni da ogni SHVM nel pool di host, l'amministratore di VDMS può controllare a quali applicazioni gli utenti di VDMS possono accedere.</block>
+  <block id="ad0fd6dc94ec49eef29883321644c80d" category="paragraph">L'aggiunta (o la rimozione) di applicazioni da ogni SHVM può essere eseguita direttamente su ogni SHVM o su una singola immagine della VM, che a sua volta può essere implementata in tutti gli SHVM nel pool di host.</block>
+  <block id="8acadeccb90bf205135348e4902b9c20" category="inline-link-macro">questo articolo</block>
+  <block id="28c82cd98785586b2bd9658fccd627e3" category="paragraph">Questo articolo illustra l'installazione diretta delle applicazioni sulle SHVM. La gestione delle immagini delle macchine virtuali è trattata nella <block ref="a92d27a5912cac3bb7dab83fae80db9f" category="inline-link-macro-rx"></block>.</block>
+  <block id="384aca537b9fadb1f16d457b39bc0857" category="section-title">Accesso manuale</block>
+  <block id="6dee285c200485e340f5129cb6151dd9" category="paragraph">Il portale di gestione VDMS fornisce accesso diretto a ciascuna macchina virtuale tramite un account amministratore locale just-in-time per tutti gli SHVM e i server aziendali. Questo accesso può essere utilizzato per connettersi manualmente a ciascuna macchina virtuale per installare manualmente le applicazioni e apportare altre modifiche alla configurazione.</block>
+  <block id="3e2161b25ff5e0cec462c799d866da31" category="paragraph">Questa funzionalità si trova in Workspace &gt; Servers &gt; Actions &gt; Connect</block>
+  <block id="7206e87cd374427fb9e10cdf1670e31e" category="inline-image-macro">900,900</block>
+  <block id="2e5ca9ce8338ed7e12248d0854d5eb10" category="paragraph"><block ref="2e5ca9ce8338ed7e12248d0854d5eb10" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="19afb9d1ac9ba6fd860315f1ca7e0b69" category="inline-link-macro">trovato qui</block>
+  <block id="78104d1abd0bb7ff7a60f2b2646929b4" category="paragraph">Se sono richieste le credenziali di amministratore del dominio, la funzionalità di gestione degli accessi con privilegi VDMS (PAM) consente di generare le credenziali di amministratore del dominio. I dettagli possono essere <block ref="6da78f0b3ed97d3f07b33982cff9a787" category="inline-link-macro-rx"></block>.</block>
+  <block id="73a293bc30e0480a720259fb32dfd519" category="section-title">Automazione VDMS</block>
+  <block id="c8791f687a8eab4bfce9fb57a97220a8" category="paragraph">Con il portale VDMS, la sezione "Scripted Events" include funzionalità per eseguire codice in remoto.</block>
+  <block id="d5d86c8cb6f00e10e175218d58ee43f2" category="paragraph">All'interno di Scripted Events, la scheda Repository contiene script "globali" pubblicati da NetApp. È possibile aggiungere script personalizzati utilizzando il pulsante "+ Aggiungi script".</block>
+  <block id="b518f4246510b7b2f0d7649dfa496519" category="paragraph">All'interno degli eventi con script, la scheda Activities (attività) contiene il trigger che causa l'esecuzione di uno script su un set di macchine virtuali. Per VDMS, i tipi di evento "Manuale" e "pianificato" sono la soluzione migliore per inviare uno script tra le macchine virtuali appropriate.</block>
+  <block id="cc6b191e16c485e0e10047bb40326fa1" category="admonition">Le attività hanno molti trigger disponibili chiamati "tipi di evento". Per VDMS, i tipi "Installazione applicazione" e "disinstallazione applicazione" non sono applicabili. Si tratta di trigger specifici di RDS e non devono essere utilizzati per VDMS, poiché VDMS è un servizio basato su WVD e segue l'architettura di progettazione di RDS.</block>
+  <block id="9b8e7bd6e8e1746756967cb32d54e643" category="section-title">Altri strumenti di automazione</block>
+  <block id="768f9d7a0dd23b6ed00806d459f92faf" category="paragraph">Le macchine virtuali in VDMS possono essere gestite con strumenti di gestione di terze parti. Le modifiche alle applicazioni e ad altre modifiche alla configurazione delle macchine virtuali possono essere applicate tramite qualsiasi tool compatibile.</block>
+  <block id="daf37e22be5944b91ad3e9f10bae946a" category="summary">Aggiunta e rimozione di amministratori in VDMS</block>
+  <block id="cd1072c0f5d3db1b2c15e15c34c852fd" category="section-title">Aggiunta di amministratori in VDMS</block>
+  <block id="a9cdcafa8b61ec6579c66a2df489614b" category="list-text">Questo processo è gestito da NetApp</block>
+  <block id="91e40577c319b6a01b52603f473309b3" category="list-text">Contattare il supporto NetApp VDMS utilizzando uno dei metodi riportati di seguito:</block>
+  <block id="3dcb90c689d5e13266b1241d68b0cbad" category="list-text">Supporto via email: VDSsupport@netapp.com</block>
+  <block id="88cc9e245d04dc16592a51f8acaca39e" category="list-text">Assistenza telefonica: 844.645.6789</block>
+  <block id="761897184911914403fb24eff6e9fa73" category="inline-link-macro">Portale di supporto VDMS</block>
+  <block id="8c0bcd4812f78591782afec72a6d71cd" category="list-text"><block ref="8c0bcd4812f78591782afec72a6d71cd" category="inline-link-macro-rx"></block></block>
+  <block id="34d259745d3da613bcc0b3adfbc639ed" category="list-text">Includere quanto segue per il nuovo account admin:</block>
+  <block id="fe9be8f63d5ba2087cd13852d40f6718" category="list-text">Codice del partner</block>
+  <block id="21aef67e8d12503aff027385d0a7867f" category="list-text">Nome e cognome</block>
+  <block id="b357b524e740bc85b9790a0712d84a30" category="list-text">Indirizzo e-mail</block>
+  <block id="1ba35231b4d109955cd66ed3863f0aa1" category="inline-link-macro">autorizzazioni di amministratore</block>
+  <block id="6fbc6323a3bfb526f94558882d009cac" category="list-text">Se le autorizzazioni sono diverse dal set predefinito definito in <block ref="2ede773ee6fbfa51f614196fcbee7730" category="inline-link-macro-rx"></block></block>
+  <block id="6dcbc4b0c3684e270a0c6cb85ab64330" category="section-title">Rimozione degli amministratori in VDMS</block>
+  <block id="b61edd6ca3ed9ef1fd846fbbb5a7743e" category="list-text">Questo processo è gestito dai partner</block>
+  <block id="1bc0f19aeec5f7092afb1c27bae98524" category="list-text">Accedere alla scheda "Admins" (amministratori)</block>
+  <block id="da84b2cbcbf8cd7d0e828499fc7a32db" category="list-text">Fare clic sui puntini Action (azione) a destra dell'amministratore che si desidera rimuovere</block>
+  <block id="eb497ca12d0310af894bdca08a29c76a" category="list-text">Fare clic su "Delete" (Elimina</block>
+  <block id="7f4aaf00d8a4414e162496ba9892f69a" category="list-text">Viene visualizzata una finestra di conferma; fare clic su "Sì, sono sicuro"<block ref="742faf550871500875b02d7ef54940f0" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="7aa1916e49d82631e70edd9fdc8569fc" category="list-text">In caso di domande, contatta il supporto NetApp VDMS utilizzando uno dei metodi riportati di seguito:</block>
+  <block id="0bb5e291a8346bfbe1abcdb9b33e91ca" category="summary">Aggiornamento e implementazione delle immagini delle macchine virtuali in VDMS</block>
+  <block id="9236529baf2a458da85cb99992dd40f4" category="doc">Aggiornare e implementare le immagini delle macchine virtuali</block>
+  <block id="c2583bd79f35d1fdfaf4832fc594e07a" category="paragraph">Questo articolo illustra la gestione delle immagini delle macchine virtuali. L'installazione diretta delle applicazioni sulle SHVM è trattata nella <block ref="33cb6a0164515f2f0ab6dc783a955d60" category="inline-link-macro-rx"></block>.</block>
+  <block id="ba18948a82e24b426e5a72f2d0902865" category="section-title">Aggiornamento dell'immagine della macchina virtuale</block>
+  <block id="ceaae77ce3a671c10b5ba688205bc95b" category="paragraph">Il metodo consigliato per aggiungere (o rimuovere) applicazioni a SHVM consiste nella modifica dell'immagine VM assegnata al pool di host. Una volta personalizzata e convalidata l'immagine della macchina virtuale, il team di supporto di VDMS può implementarla su richiesta in tutti gli SHVM del pool di host.</block>
+  <block id="e36aeacb8867d36675477317c9171a44" category="list-title">Come modificare l'immagine della macchina virtuale</block>
+  <block id="6aba11bcdf4b1e91d230f5912ec2d899" category="list-text">Accedere a "Provisioning Collections" all'interno dell'implementazione nel portale VDS</block>
+  <block id="382d0f32201b4ccc098f087a2436cf06" category="list-text">Fare clic sulla raccolta di provisioning associata al pool di host che si desidera aggiornare.</block>
+  <block id="6c0ff8a5567842dfa1ee64d8b354e911" category="paragraph"><block ref="6c0ff8a5567842dfa1ee64d8b354e911" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="d3df87e9f2d03852531d7f34a5baf341" category="list-text">Prendere nota del nome "modello VM" nella sezione "Server".</block>
+  <block id="6e61c51afb9d0a469e3c9ea737aca8b1" category="paragraph"><block ref="6e61c51afb9d0a469e3c9ea737aca8b1" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="e012c6c08105f159bae083124447c7ae" category="paragraph"><block ref="e012c6c08105f159bae083124447c7ae" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="b566a76fb68de3babffe22d88e1e7c3e" category="list-text">Modificare il modello del server assicurandosi che il modello di origine sia il modello di macchina virtuale annotato al punto 2.a. sopra. Fare clic su "continua"</block>
+  <block id="d41d8cd98f00b204e9800998ecf8427e" category="inline-image-macro"></block>
+  <block id="fe619623ee4bf5904f210a60cf63df7a" category="paragraph"><block ref="fe619623ee4bf5904f210a60cf63df7a" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="76f82382f0749e5a50b762a918028ea3" category="admonition">*Non modificare queste impostazioni:* 1. Type (tipo) = VDI 2. Share Drive = vuoto 3. Cache minima = 0 4. Unità dati = deselezionato 5. Storage Type (tipo di storage) = Standard_LRS</block>
+  <block id="6de3ef94ae2319b669043569d30ef7bc" category="list-text">L'automazione VDMS crea ora una macchina virtuale temporanea in Azure, il nome della macchina sarà _CWT n._. La creazione di questa macchina virtuale potrebbe richiedere 25 minuti. Una volta completato il processo, lo stato passa a "Pending" (in sospeso)</block>
+  <block id="fe057f36a544a8ec1a7f829f7f7a9fb1" category="list-text">Nota: Questa macchina virtuale verrà eseguita fino al completamento del processo di personalizzazione, pertanto è importante creare, personalizzare e convalidare la macchina virtuale entro uno o due giorni.</block>
+  <block id="245b93e1390f56d51ea505b78bbef646" category="list-text">Una volta che la macchina virtuale temporanea è pronta, è possibile accedere alla macchina virtuale modificando Provisioning Collection e facendo clic su "Connect" (Connetti) sul server.</block>
+  <block id="d1d3afc9697d853892811e7c1dad4def" category="list-text">Quando vengono richieste le credenziali, le credenziali di amministratore del dominio possono essere generate da qualsiasi amministratore VDMS con diritti "approvatore PAM".</block>
+  <block id="30541ed22d69997e599dc3adf418fc15" category="list-title">Come implementare un'immagine VM aggiornata</block>
+  <block id="c0b57b5a2501ec6d0ef82f17e00d086c" category="list-text">Una volta convalidata l'immagine della macchina virtuale, contattare il team di supporto VDMS per pianificare un aggiornamento dell'immagine.</block>
+  <block id="2208de05b3461ad36b9d2e8377cb3322" category="list-text">Il team costruirà nuovi host di sessione in base alla nuova immagine.</block>
+  <block id="65972c6ef9da7713441d049ae0128e3c" category="list-text">Se necessario, coordinare il tempo necessario per testare i nuovi host prima di reindirizzare i nuovi utenti ai nuovi host.</block>
+  <block id="99061db7a314c44533fe9c7c7fb25761" category="list-text">Una volta pronti, il team di supporto reindirizzerà tutte le nuove sessioni utente ai nuovi host. I vecchi host verranno arrestati quando non sono connessi utenti. Queste vecchie macchine virtuali rimarranno in uno stato disallocato per il warm failover, ma verranno eliminate automaticamente dopo 7 giorni.</block>
+  <block id="38e3e611d6a8eedc3b7a3bd5fea1cf33" category="section-title">Modifica diretta degli SHVM</block>
+  <block id="37a128c0f52cb4d13156474d347e6749" category="paragraph">Le modifiche possono essere apportate direttamente sugli SHVM manualmente o tramite qualsiasi tool di automazione disponibile. Ulteriori informazioni sono disponibili in <block ref="33cb6a0164515f2f0ab6dc783a955d60" category="inline-link-macro-rx"></block>.</block>
+  <block id="98d26d31f279875593ba96ea9fcf9a47" category="paragraph">Quando si apportano modifiche direttamente alle SHVM in un pool di host, è fondamentale che ciascuna SHVM rimanga configurata nello stesso modo, altrimenti gli utenti potrebbero avere esperienze non coerenti con la connessione a SHVM differenti.</block>
+  <block id="d595326786cb4f40d3d1a15219ccf443" category="admonition">Per impostazione predefinita, il backup dei singoli SHVM non viene eseguito perché in genere non dispongono di dati univoci e si basano su un'immagine VM standardizzata. Se si eseguono personalizzazioni direttamente sulle SHVM, contattare il supporto per applicare una policy di backup a una delle SHVM nel pool di host.</block>
+  <block id="063086acb3cd3bc4bcd71bfb7cfb937f" category="section-title">Risoluzione dei problemi di Sysprep</block>
+  <block id="0d1e6919f6a6eee5c22d9157b93a54bc" category="paragraph">La funzione "Validate" dell'immagine VDMS utilizza l'utility Sysprep di Microsoft. Quando la convalida non riesce, il responsabile più comune è un errore di Sysprep. Per risolvere i problemi, avviare il file di log Sysprep che si trova sulla macchina virtuale CWT nel percorso C: Windows System setupact.log</block>
+  <block id="96f45a5169265d06aeb96ba4d7a88462" category="summary">Riepilogo dell'offerta di servizi VDMS</block>
+  <block id="70522576fd7d9f0925f2cd2402000958" category="doc">Riepilogo del servizio Virtual Desktop Managed Service (VDMS)</block>
+  <block id="8071162c8da0f29504c0a424813d8b5d" category="section-title">Allocazione risorse utente</block>
+  <block id="13bb5110902d802c85e027ab12a720d6" category="admonition">Questo articolo descrive con precisione i dettagli tecnici del servizio VDMS. I dettagli del servizio sono soggetti a modifiche e questo articolo non rappresenta una modifica o una modifica di accordi, contratti o altri accordi esistenti tra NetApp e qualsiasi cliente o partner.</block>
+  <block id="c701b955dfdc6e4e8a190529f6746e1e" category="section-title">Utenti condivisi (SKU: VDMS-SUBS-SHARED-USER)</block>
+  <block id="8fad8c69e075fc2661cc81aabb605480" category="paragraph">Le sessioni utente condivise vengono eseguite su una macchina virtuale host di sessione (SHVM) con un massimo di 10 sessioni utente. Il numero totale di SHVM condivise allocate garantisce almeno una SHVM condivisa per ogni 10 utenti condivisi nell'ambiente.</block>
+  <block id="0898e2fd1f4443603008d48f7079c9b0" category="paragraph">*Risorse allocate per utente condiviso:*</block>
+  <block id="4e425171e3570e45314831ebb1308604" category="list-text">8/10 di un core vCPU</block>
+  <block id="664d3d9378e9e2a9c16c8e7c60f922f9" category="list-text">6.4 GB di RAM</block>
+  <block id="7132ebab180a554b623b31f1cdfc9f34" category="list-text">25 storage GiB</block>
+  <block id="f8039904415b55195907fb24d1c456a3" category="paragraph">*Dettagli tecnici SHVM condivisi:*</block>
+  <block id="35eff763be0c4a28131f478c7c9ca164" category="inline-link-macro">Esv3</block>
+  <block id="e4f79b9787dd939692283f7e2d3e0055" category="inline-link-macro">Eav4</block>
+  <block id="b638de3e953add99aed10f2b788118b1" category="inline-link-macro">Easv4</block>
+  <block id="b7b861a49f90a10eb8dfc31f2966ada4" category="list-text">In genere da <block ref="ed9cf184a4e673898e740e53c86b379f" category="inline-link-macro-rx"></block>, <block ref="89d1beed2396587db0cfbec9daa997bf" category="inline-link-macro-rx"></block> e. <block ref="2be2d37ef8c06ff181019e1e04bdcc77" category="inline-link-macro-rx"></block> Famiglie di macchine virtuali Azure.</block>
+  <block id="e08f66ea7c7779e53aadae330f2f06ec" category="list-text">Disco OS SSD standard da 128 GiB</block>
+  <block id="06580f6a8c004936f0620c96a2f49733" category="list-text">Windows 10 Enterprise per Virtual Desktop</block>
+  <block id="c958b26f95acbc7f0d62d8afe7e53a55" category="list-text">Profilo utente FSLogix Attached Containers</block>
+  <block id="2cec20f97814ee0af3125fba1c58673c" category="list-text">Storage collegato per la condivisione aziendale</block>
+  <block id="fd7a1486cadfbdcd514deb776e0f7789" category="section-title">UTENTI VDI (SKU: VDMS-SUBS-VDI-USER)</block>
+  <block id="08dae8553f81b438e19b19846fde56f1" category="paragraph">La sessione di un utente VDI viene eseguita su una macchina virtuale host di sessione dedicata (SHVM) che non ospita contemporaneamente altre sessioni utente. Il numero totale di SHVM VDI è uguale al numero totale di utenti VDI nell'ambiente.</block>
+  <block id="8d87e391da5be7757ee01945bd114cb3" category="paragraph">*Risorse allocate per utente VDI:*</block>
+  <block id="99014996950d469f81921dba47998707" category="list-text">2 core vCPU</block>
+  <block id="e3e64e60045c5d89b9f2addc887abdc8" category="list-text">8 GB di RAM</block>
+  <block id="35c71bd12d6cd818d6a57162805190c0" category="paragraph">*Dettagli tecnici di VDI SHVM:*</block>
+  <block id="13e52e0f9b9e0dd182d82618fdb4316f" category="inline-link-macro">Dsv3</block>
+  <block id="cf1d671193d7766ada86fb0c46ea5e1f" category="inline-link-macro">Dav4</block>
+  <block id="dbfca40478ffe4c54584645a377aeaa1" category="inline-link-macro">Dasv4</block>
+  <block id="cea32a3019fc5980c530f844a9636c55" category="list-text">In genere da <block ref="9697dce2bcf67114d27237393027d225" category="inline-link-macro-rx"></block>, <block ref="095f2e699aba0331095e70b01fe9667c" category="inline-link-macro-rx"></block> e. <block ref="3e036509970960bd5056e1b4d52236bd" category="inline-link-macro-rx"></block> Famiglie di macchine virtuali Azure.</block>
+  <block id="537e7ec705664da3e36c58a0855228ff" category="list-text">Disco OS HDD standard da 128 GiB</block>
+  <block id="efdc8ab256c11020561f50283f989b21" category="section-title">UTENTI GPU (SKU: VDMS-SUBS-GPU-USER)</block>
+  <block id="032f26c6c680e23da95a0768542a01ae" category="paragraph">La sessione di un utente GPU viene eseguita su una macchina virtuale host sessione dedicata (SHVM) che non ospita contemporaneamente altre sessioni utente. Il numero totale di SHVM GPU corrisponde al numero totale di utenti GPU nell'ambiente.</block>
+  <block id="b08470dc26d2c68c8ffe0f05f8476db1" category="paragraph">*Risorse allocate per utente GPU:*</block>
+  <block id="9aff0efcaf7aa8ebcc772798c38c7089" category="list-text">8 GIB GPU RAM</block>
+  <block id="e8d94bb007a86c862d791623a75a5b92" category="paragraph">*GPU SHVM scheda tecnica:*</block>
+  <block id="6b444377efe5058dab7dce405542b207" category="inline-link-macro">NVv3</block>
+  <block id="ab003bb2af504bdc1890c7156c12f90d" category="inline-link-macro">NVv4</block>
+  <block id="9ffe83ad6819ce8af9df026ee2a12ed3" category="list-text">In genere da <block ref="4ea7c48cd6617457bac8cc896bd2553e" category="inline-link-macro-rx"></block> e. <block ref="0b543f3bc3eca6927ae971a0a3b696e9" category="inline-link-macro-rx"></block> Famiglie di macchine virtuali Azure.</block>
+  <block id="eff88cd2787a7835276dec68d5017f78" category="section-title">Altri SKU VDMS</block>
+  <block id="8e9a2b5aade33ca7d989a8ed0803d7cf" category="section-title">Server aziendali (SKU: VDMS-AZURE-BUSINESS-VM)</block>
+  <block id="2f8f485c4d84e3dec215d3a46a97d940" category="paragraph">Il server aziendale può essere aggiunto a un ambiente per supportare applicazioni e servizi.</block>
+  <block id="833a21998d6bf8cf0bee6bfd9755368e" category="paragraph">*Ogni macchina virtuale del server aziendale viene allocata almeno:*</block>
+  <block id="cf9c8960c763aa7c2bce6433c941d296" category="list-text">8 core vCPU</block>
+  <block id="a1e4922c6323d230b8cb5eafbd7a29cc" category="list-text">64 GB di RAM</block>
+  <block id="d45e7a12c09e9a60a734fe0605f9b06b" category="list-text">Windows Server 2012R2/2016/2019</block>
+  <block id="0347997734e80a11ba4b7cf64ebecb9c" category="section-title">Storage aggiuntivo (SKU: VDMS-1 TB-STORAGE-HPRSCLR)</block>
+  <block id="edcb3f5efd3f6b86bd2423b4c444f237" category="paragraph">Il _livello di storage dei dati_ è il meccanismo di storage primario per l'ambiente VDMS e viene eseguito su file Azure o Azure NetApp Files (ANF). La tecnologia di storage utilizzata è determinata dal numero totale di utenti VDMS acquistati. È possibile aggiungere capacità aggiuntiva con incrementi di 1 TiB.</block>
+  <block id="9d4ab1afe1fde908af9e0941140ee51c" category="paragraph">I profili utente, i dati utente, le condivisioni aziendali, i dati delle applicazioni e i database devono essere eseguiti da questo servizio di storage. Si consiglia di evitare di memorizzare i dati sui dischi delle macchine virtuali quando possibile.</block>
+  <block id="81e8630cd70b11de2e40c88a75df2fb4" category="paragraph">La capacità è la somma dell'allocazione per utente (25 GiB/utente) e dello storage Tibs aggiuntivo acquistato.</block>
+  <block id="216ab40cda5c7c00ff42a4efb1827d89" category="cell">Metrico</block>
+  <block id="90bd28628286d0369bc5566d1ad7183d" category="inline-link-macro">File Azure GPv2</block>
+  <block id="83c096dc581b472a9917d93e1fd04742" category="cell"><block ref="83c096dc581b472a9917d93e1fd04742" category="inline-link-macro-rx"></block></block>
+  <block id="2ee56f38f9d514e4b86bd79b889a1fd6" category="inline-link-macro">STANDARD ANF</block>
+  <block id="78873ec8d46ffae6610437508a974c62" category="cell"><block ref="78873ec8d46ffae6610437508a974c62" category="inline-link-macro-rx"></block></block>
+  <block id="ebe38988f3aab7bae61bbd1f603f8ef4" category="inline-link-macro">ANF Premium</block>
+  <block id="262554da97fff4ccb6d0f2ed70542373" category="cell"><block ref="262554da97fff4ccb6d0f2ed70542373" category="inline-link-macro-rx"></block></block>
+  <block id="7d83e72583af3d8a08a95140a5b1e3b6" category="cell">Numero di utenti</block>
+  <block id="742be8b47e2b32917e7a987968259cf4" category="cell">10-49</block>
+  <block id="7ded92bbd56e1e2cf180aaf70625c732" category="cell">50-249</block>
+  <block id="0e702a773d399722dd841bcde5c8be15" category="cell">250+</block>
+  <block id="9dba50d3a2c2f26daddbf9d144c49772" category="cell">Dimensione minima</block>
+  <block id="272fce320d1d39a47ad589ea9ebc2af6" category="cell">250 GiB</block>
+  <block id="09db5cf9dee1953ac746dd636e0db3e0" category="cell">4 TIB</block>
+  <block id="79073619fba8242703524f16870ff858" category="cell">IOPS</block>
+  <block id="82072969a6f4a521b38eec5bfcbfa026" category="cell">Fino a 1,000</block>
+  <block id="26f11596d97c80193415e41391ec3e9a" category="cell">Fino a 250/TIB</block>
+  <block id="69a3be734586931892217fb735943524" category="cell">Fino a 1,000/TIB</block>
+  <block id="d3a38a38525619a60766615947e2efea" category="summary">Ruoli e responsabilità del servizio VDMS</block>
+  <block id="005602cbcfd03b7cf963c6bb4a0eae8f" category="doc">Ruoli e responsabilità del servizio VDMS</block>
+  <block id="d7a0fdc3b195f0c6e1ed2198153b80bb" category="summary">Riepilogo delle autorizzazioni di amministrazione di VDS</block>
+  <block id="5dc26064e87f654304131fcfd3daa69a" category="doc">Autorizzazioni di amministrazione VDS</block>
+  <block id="5b6882e7ef1f887ec6419b3daebc8735" category="section-title">Panoramica delle autorizzazioni di amministrazione</block>
+  <block id="7e05b9cae4e3d540574176f7153fbf96" category="paragraph">Gli amministratori di VDMS hanno accesso limitato al portale di amministrazione di VDS. Poiché VDMS è una soluzione co-gestita, esistono set di autorizzazioni non abilitati per gli amministratori VDMS. Queste azioni sono riservate al team di supporto NetApp. Se sono necessarie azioni che non possono essere eseguite a causa di limitazioni di autorizzazione, contattare il supporto per assistenza.</block>
+  <block id="d05e9f08eecf734428d35a1fcedffb90" category="section-title">Impostazioni del tipo di account</block>
+  <block id="7cd4109429c8312a89ac1f49934f3ccf" category="paragraph">All'interno dell'account amministratore di VDMS, le seguenti impostazioni sono predefinite.</block>
+  <block id="a1fa27779242b4902f7ae3bdd5c6d508" category="cell">Tipo</block>
+  <block id="6b66a61fa66288a9a7ad6474d2e686ec" category="cell">Valore predefinito</block>
+  <block id="f4c6f851b00d5518bf888815de279aba" category="cell">Note</block>
+  <block id="d5e3e97669ced4708d68d647e525ce9e" category="cell">Account tecnico</block>
+  <block id="f8320b26d30ab433c5a54546d21f414c" category="cell">Falso</block>
+  <block id="cf1b576e701e43c9c13c3f0208d89387" category="cell">Può essere modificato su richiesta al supporto NetApp. Quando questa opzione è attivata, all'amministratore vengono richieste le credenziali quando si effettua la connessione a qualsiasi macchina virtuale tramite il portale VDS. Se disattivato, admin viene autenticato automaticamente (con account admin locale generato automaticamente) quando si connette a qualsiasi macchina virtuale tenant tramite il portale VDS. Agli amministratori vengono comunque richieste le credenziali durante la connessione a qualsiasi macchina virtuale del server della piattaforma.</block>
+  <block id="49cc3c60e5e92840d647161b1a0d5674" category="inline-link-macro">Approvatore PAM</block>
+  <block id="ed7ed8349364aaa897c69891d2a45419" category="cell"><block ref="ed7ed8349364aaa897c69891d2a45419" category="inline-link-macro-rx"></block></block>
+  <block id="f827cf462f62848df37c5e1e94a4da74" category="cell">Vero</block>
+  <block id="8ed2ba64fcd0132ae97f3a42e8532166" category="cell">Può essere modificato su richiesta al supporto NetApp. Tutti i clienti devono avere almeno un account amministratore abilitato come approvatore PAM.</block>
+  <block id="c69eca844828e06e0640b3d2a0a3c143" category="cell">Supporto utente</block>
+  <block id="cc03a2c33646dc588261f08a09cc9095" category="cell">Questa funzione non si applica a VDMS.</block>
+  <block id="dc43bfde4556ec8545b0aa64ed23837b" category="cell">Utente shadow</block>
+  <block id="87c9d6a3251c3a06635ba622ff81145a" category="cell">Può essere modificato su richiesta al supporto NetApp. Una volta attivata, l'amministratore può connettersi alla sessione di un utente finale e vedere cosa vede per fornire supporto all'utente finale.</block>
+  <block id="26ab6a271aedb1fff35392d6cf869e3b" category="cell">MFA attivato</block>
+  <block id="84e6972e06fa7b02bb1b7d57bc33d18c" category="cell">Richiede che l'accesso dell'amministratore al portale di amministrazione VDMS sia protetto mediante MFA integrato. Sono supportati i metodi SMS e/o e-mail.</block>
+  <block id="7fcdb550ca4f1e48f367deba0c3ff630" category="section-title">Autorizzazioni account amministratore</block>
+  <block id="72699bb96a95dff4248c8236e66e1193" category="paragraph">All'interno dell'account amministratore di VDMS, le seguenti autorizzazioni sono predefinite.</block>
+  <block id="e55f75a29310d7b60f7ac1d390c8ae42" category="cell">Modulo</block>
+  <block id="4351cfebe4b61d8aa5efa1d020710005" category="cell">Visualizza</block>
+  <block id="7dce122004969d56ae2e0245cb754d35" category="cell">Modifica</block>
+  <block id="f2a6c498fb90ee345d997f888fce3b18" category="cell">Eliminare</block>
+  <block id="ec211f7c20af43e742bf2570c3cb84f9" category="cell">Aggiungi</block>
+  <block id="e3afed0047b08059d0fada10f400c1e5" category="cell">Amministratore</block>
+  <block id="521c36a31c2762741cf0f8890cbe05e3" category="cell">Acceso</block>
+  <block id="d15305d7a4e34e02489c74a5ef542f36" category="cell">Spento</block>
+  <block id="55c32b406a415642c4be28bb7f15e18f" category="cell">L'aggiunta di account admin e/o la modifica delle autorizzazioni amministrative viene gestita dal supporto NetApp.</block>
+  <block id="55897b2ee79066418cbb79cd09d7de56" category="cell">Servizi app</block>
+  <block id="4cfff72719609c16d511a3037d4a6781" category="cell">Il set di funzionalità di App Services non è supportato in VDMS.</block>
+  <block id="1ddf333c6654f7f89c739dddfb4cc429" category="cell">Applicazioni</block>
+  <block id="9d1fc783a2a3cae6f5113ecc305826ef" category="inline-link-macro">aggiornare e implementare le immagini</block>
+  <block id="fa54b0f3b62ce93c357e436e8a9a9a57" category="cell">Le funzioni delle applicazioni in VDS sono specifiche di RDS. VDMS è un servizio basato su WVD e la gestione delle applicazioni non viene gestita con questa funzione. Vedere <block ref="a532c9f084f46c6a855d757a074bb9f3" category="inline-link-macro-rx"></block> Per ulteriori informazioni sulla distribuzione delle applicazioni per VDMS.</block>
+  <block id="b06c94565d768dd75535120f2f8482a7" category="cell">Audit</block>
+  <block id="0f558243fbf45f1cd840fff01957f57b" category="cell">Client</block>
+  <block id="d4130240f822c63ce2fe56c9525a16a0" category="cell">La creazione/rimozione del client viene gestita dal supporto NetApp.</block>
+  <block id="3081015fddfcd25b52903a5dc112ca7c" category="cell">Implementazioni</block>
+  <block id="04fd763440a9d9b21f290ecd48769379" category="cell">La creazione/rimozione dell'implementazione viene gestita dal supporto NetApp.</block>
+  <block id="483a9d9cfd5caf508318528d7d33ee55" category="cell">Regole firewall</block>
+  <block id="60c7502b5c40479908aed919a94c1786" category="cell">Cartelle</block>
+  <block id="a37ede293936e29279ed543129451ec3" category="cell">Gruppi</block>
+  <block id="02ebd0b80e8dfe739d455ae3325ce3e3" category="cell">L'eliminazione dei gruppi di utenti viene gestita dal supporto NetApp. Alcuni gruppi di utenti sono obbligatori</block>
+  <block id="fd6df34ee4e7642c02ced6012028f6b8" category="cell">Partner</block>
+  <block id="84b1175bc23ed9e1d51a477c4e6ea2af" category="cell">Il set di funzionalità Partner non è supportato in VDMS. Visualizzare le autorizzazioni necessarie per visualizzare gli elenchi dei tenant.</block>
+  <block id="5760353c204c96a4ad1c2a433433f44c" category="cell">Modelli di provisioning</block>
+  <block id="ee8f950230eb6736fe74838884276d10" category="cell">La creazione/rimozione delle immagini viene gestita dal supporto NetApp.</block>
+  <block id="c91c7b93c28cd18741b71f727ee81ee3" category="cell">Report</block>
+  <block id="ddcf50c29294d4414f3f7c1bbc892cb5" category="cell">Risorse</block>
+  <block id="8fde96b6b53ed8ff01b171b2558707ac" category="cell">Le impostazioni delle risorse vengono gestite dal supporto NetApp.</block>
+  <block id="78054cd2f54e3e84c28c8b0c14457ef6" category="cell">Eventi con script</block>
+  <block id="ac659513b2353187192e88c5d1988228" category="cell">Server</block>
+  <block id="025d4c0374ab8ff0ebbdfed77eadf7b8" category="cell">Le impostazioni di creazione/rimozione del server vengono gestite dal supporto NetApp.</block>
+  <block id="aa1315a19149418839bbbc0f0063228b" category="cell">Scheda di servizio</block>
+  <block id="f4f70727dc34561dfde1a3c529b6205c" category="cell">Impostazioni</block>
+  <block id="f9aae5fda8d810a29f12d1e61b4ab25f" category="cell">Utenti</block>
+  <block id="d5e92609cf510f5f97ac326e907a0540" category="cell">Aree di lavoro</block>
+  <block id="8c541e8ad3aab98d9c2dbac2472ab7e2" category="cell">La creazione/rimozione dello spazio di lavoro viene gestita dal supporto NetApp.</block>
+  <block id="40672ff87dc9f7a95a33c7216ee64955" category="summary">Rimozione dell'accesso utente in VDMS</block>
+  <block id="49c9243c88915c1393a41cd9bfdb96f1" category="doc">Rimozione dell'accesso utente</block>
+  <block id="1896c044e89799022bf8b538b4dd6c09" category="section-title">Rimozione di un utente</block>
+  <block id="f4219fd258da70da218e29b7aa9ce98f" category="list-title">Nuove implementazioni di Active Directory (è stato creato un nuovo dominio Active Directory per VDMS)</block>
+  <block id="2b5800940254d7c3cd649bd2cc45b7b7" category="list-text">Eliminare l'utente in VDMS</block>
+  <block id="f67f2cec4fbbaba4514eb9129596a00d" category="list-text">Accedere all'area di lavoro, selezionare la scheda "Users &amp; Groups" (utenti e gruppi), fare clic sui punti di azione accanto all'utente da eliminare, quindi fare clic su "Delete" (Elimina)<block ref="49be77491de3fa79d6b69f67f8eb9945" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="b801b82b5f5c4f8c12461f94512f0c19" category="list-text">Viene visualizzata una finestra a comparsa con le opzioni Delay Deletion (ritardo eliminazione) e Delete from Directory (Elimina dalla directory)<block ref="e4d8b0c6abbd02cd29ebc471401474f5" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="c96013281d49394c4634c7403a096b41" category="list-text">L'opzione Delay Deltion (eliminazione ritardo) attende 90 minuti prima di eliminare l'utente, consentendo l'annullamento del processo. Si consiglia di selezionare questa casella.</block>
+  <block id="a6d17d9281a07ff82516c72f719bb1ec" category="list-text">L'opzione Delete from Directory (Elimina dalla directory) elimina l'account utente di Active Directory. Questa casella deve essere selezionata.</block>
+  <block id="073d48bdb0d4f50dc5fb4b34aa19a824" category="list-text">Notificare a NetApp la rimozione dell'utente utilizzando uno dei metodi riportati di seguito</block>
+  <block id="cb97f0bec1842e8c8a2d34fe19793d1b" category="list-title">Implementazioni Active Directory esistenti (VDMS si sta connettendo a un Active Directory esistente)</block>
+  <block id="a7f7992bbd09f7d531e95587a1bb3f68" category="list-text">Viene visualizzata una finestra a comparsa con le opzioni Delay Deletion (ritardo eliminazione) e Delete from Directory (Elimina dalla directory)<block ref="bae6ebac53fd14801b2950e669918fa9" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="d9d08fd81c8e53570265128157d3fff6" category="list-text">L'opzione Delete from Directory (Elimina dalla directory) elimina l'account utente di Active Directory. Si consiglia DI NON selezionare questa casella e di seguire il processo di eliminazione dell'account utente dell'organizzazione per eliminare l'account da Active Directory.</block>
+  <block id="98bc530693a52fafe469f30614e8f883" category="summary">Benvenuti nel portale della documentazione per Virtual Desktop Managed Service.</block>
+  <block id="9f817877212aa8b2757f521dbf32cd41" category="doc">Documentazione Virtual Desktop Managed Service</block>
+  <block id="3b878279a04dc47d60932cb294d96259" category="section-title">Panoramica</block>
+  <block id="2637b7de7d33d19378c198b8be6838bf" category="paragraph">Il Virtual Desktop Managed Service (VDMS) di NetApp risolve la complessità dell'implementazione e della gestione dei desktop virtuali nel cloud pubblico, offerto come piattaforma VDI as a Service gestita.</block>
+  <block id="ad03304ebb58420571f6373a6c9d8ec7" category="section-title">Ottenere supporto</block>
+  <block id="54defe6db64b2cfbdd2cd6ccc464206d" category="paragraph">Supporto via email: support@spotpc.netapp.com</block>
+  <block id="0b7ecd3f16fdb38fd9df7824bc8d7b1f" category="paragraph">Orari di lavoro normali del supporto: Da lunedì a venerdì, dalle 7:00 alle 19:00 fuso orario centrale.</block>
+  <block id="d13c2f018ea5180520061bfbbc26db45" category="list-text">Supporto fuori orario (on-call) disponibile solo per telefono.</block>
+  <block id="5415e4af755fea4714f1671504efcd13" category="section-title">Client Windows Virtual Desktop (WVD)</block>
+  <block id="dfdf288956a9f63a5bae66aff6f73337" category="inline-link-macro">Client Microsoft WVD per Windows</block>
+  <block id="3c6a3d5491e156e43159551aea166eac" category="list-text"><block ref="3c6a3d5491e156e43159551aea166eac" category="inline-link-macro-rx"></block></block>
+  <block id="4b43e9013fc9eb09c085b7c544ded089" category="inline-link-macro">Client Web Microsoft WVD</block>
+  <block id="7fd34e8df1747b4bff9245d9132b966b" category="list-text"><block ref="7fd34e8df1747b4bff9245d9132b966b" category="inline-link-macro-rx"></block></block>
+  <block id="b4611a2d3d5a5e3739a1c6e591c54c45" category="inline-link-macro">Client Microsoft WVD per Android</block>
+  <block id="e171ab639221a7dd239974c2b86d2fa5" category="list-text"><block ref="e171ab639221a7dd239974c2b86d2fa5" category="inline-link-macro-rx"></block></block>
+  <block id="88e5ff73d6f89b2579347681a57888a5" category="inline-link-macro">Microsoft WVD per client macOS</block>
+  <block id="ff5a31bd5c49822af23db663021be551" category="list-text"><block ref="ff5a31bd5c49822af23db663021be551" category="inline-link-macro-rx"></block></block>
+  <block id="ab820e6f4b3da259f734f7719dc03beb" category="inline-link-macro">Client Microsoft WVD per iOS</block>
+  <block id="c0f265d8b364ec0302ca37319c93f323" category="list-text"><block ref="c0f265d8b364ec0302ca37319c93f323" category="inline-link-macro-rx"></block></block>
+  <block id="f89a22674e8a92e50b2f8aad878c2dc1" category="section-title">Componenti di servizio</block>
+  <block id="221183f642ade47cc467abe7b9812d30" category="paragraph">VDMS è un'offerta di servizi co-gestiti che riunisce diverse tecnologie di NetApp e Microsoft e applica le Best practice apprese oltre 20 anni nel mercato EUC. Di seguito viene riportato un elenco di componenti selezionati. Non tutti i componenti vengono utilizzati in tutte le implementazioni a causa delle diverse esigenze dei clienti.</block>
+  <block id="cfaa375bf6c7f9fcc1bc04d4f30c9154" category="section-title">NetApp</block>
+  <block id="8f53b5241aa3284f9058318dcbc2504d" category="inline-link-macro">Azure NetApp Files (ANF)</block>
+  <block id="807c90ee9f6f726952c2838ef0c351e1" category="list-text"><block ref="807c90ee9f6f726952c2838ef0c351e1" category="inline-link-macro-rx"></block></block>
+  <block id="e7c7def4c520da02d9d2de3af21bfe23" category="list-text">Il livello di storage dei dati per le implementazioni con più di 49 utenti si basa su ANF.</block>
+  <block id="2b777d6a2e70fbbf8bc7129f2344fbdc" category="list-text">Per implementazioni con meno di 250 utenti viene utilizzato il Tier di performance standard.</block>
+  <block id="f01388bdfcc7b5decd2e457dd9643b4c" category="list-text">Per implementazioni con oltre 249 utenti viene utilizzato il Tier di performance premium.</block>
+  <block id="43eacebb5257cc3f7ffeafcc431ace05" category="inline-link-macro">Backup cloud NetApp</block>
+  <block id="707d9a52c2b2c0f6bad5780695b059cb" category="list-text"><block ref="707d9a52c2b2c0f6bad5780695b059cb" category="inline-link-macro-rx"></block></block>
+  <block id="e6d64656856b343cebd019acbb40b76a" category="list-text">NetApp Cloud Backup viene utilizzato per il backup dei volumi di storage ANF.</block>
+  <block id="dc188738e6cc2e9f8314e1b95f18ebfd" category="inline-link-macro">NetApp Cloud Sync</block>
+  <block id="1fa9af60cd9be0da37c7968ddb64376a" category="list-text"><block ref="1fa9af60cd9be0da37c7968ddb64376a" category="inline-link-macro-rx"></block></block>
+  <block id="9f518c7170c02cabfafe2faf89a81c4d" category="list-text">NetApp Cloud Sync può essere utilizzato per migrare i dati in VDMS quando ANF è la tecnologia del livello di storage dei dati.</block>
+  <block id="a1722ee1a41c4364dfc3dcf1cca5c81b" category="inline-link-macro">NetApp Cloud Insights</block>
+  <block id="4ee4516d2b6023b325419caa07f812a6" category="list-text"><block ref="4ee4516d2b6023b325419caa07f812a6" category="inline-link-macro-rx"></block></block>
+  <block id="91988dd1ea5b991fb85629c6b00d4540" category="list-text">NetApp Cloud Insights viene utilizzato dal nostro team di supporto e servizi per il monitoraggio delle performance.</block>
+  <block id="bf32c55b9c9938dc916aec0ea1c0284c" category="inline-link-macro">Supporto NetApp VDMS</block>
+  <block id="eeb24dc4a000ededfac7873179c95601" category="list-text"><block ref="eeb24dc4a000ededfac7873179c95601" category="inline-link-macro-rx"></block></block>
+  <block id="7719afad377344d8e2107f50bdf4e0f6" category="list-text">VDMS include il supporto per gli incidenti 24/7 ore su 24, 7 giorni su 7 e servizi di inboarding forniti da un team di supporto NetApp specializzato</block>
+  <block id="140864078aeca1c7c35b4beb33c53c34" category="section-title">Microsoft</block>
+  <block id="db518c790e08ef4681e765d4a8cb77bb" category="inline-link-macro">File Azure (AF)</block>
+  <block id="5d4ee9d5685d5641ce2c8c2ba4dabe0c" category="list-text"><block ref="5d4ee9d5685d5641ce2c8c2ba4dabe0c" category="inline-link-macro-rx"></block></block>
+  <block id="f4ed5596725574cbc7927eae7b6c6adb" category="list-text">Il livello di storage dei dati per le implementazioni con meno di 50 utenti si basa sulla tecnologia AF. Configuriamo il Tier "ottimizzato per le transazioni" in un account di storage GPv2.</block>
+  <block id="64cde2a8b64e175bcadca975c13f467d" category="list-text">Per implementazioni con oltre 49 utenti viene utilizzato ANF.</block>
+  <block id="2d5dc75ae0469095c0637f057c402dd9" category="inline-link-macro">Backup cloud Azure</block>
+  <block id="ec91135da0e64bcbb6a4909a510f9421" category="list-text"><block ref="ec91135da0e64bcbb6a4909a510f9421" category="inline-link-macro-rx"></block></block>
+  <block id="ba9e9d4cfd02480f0d197ed3c3df3fb1" category="list-text">Azure Cloud Backup viene utilizzato per il backup di volumi di storage AF e macchine virtuali.</block>
+  <block id="bebb460745cf70f0fb01567618da6ace" category="inline-link-macro">Azure file Sync</block>
+  <block id="1d27d66e4d1610ec85aa556b17b7a21c" category="list-text"><block ref="1d27d66e4d1610ec85aa556b17b7a21c" category="inline-link-macro-rx"></block></block>
+  <block id="c06b0209ebb258572c8ca2cb4e428d7a" category="list-text">Azure file Sync può essere utilizzato per migrare i dati in VDMS quando AF è la tecnologia del layer di storage dei dati.</block>
+  <block id="5108ba6c5030a5032f1009bc8c0607c2" category="inline-link-macro">Azure Defender</block>
+  <block id="2efda18dbfc1ccfbe33cd7fafa81c028" category="list-text"><block ref="2efda18dbfc1ccfbe33cd7fafa81c028" category="inline-link-macro-rx"></block></block>
+  <block id="6a9959db688a881cbcadb8dd291008c4" category="list-text">VDMS attiva (e include licenze per) Azure Defender, un servizio di sicurezza avanzato su tutte le macchine virtuali dell'ambiente. La gestione e l'amministrazione vengono eseguite tramite Azure Security Center dal cliente e/o dal suo provider di servizi IT. La gestione di Azure Security Center non è un servizio incluso in VDMS.</block>
+  <block id="ed826a0ea4b8d674a29a54acb3442471" category="inline-link-macro">Macchine virtuali Azure</block>
+  <block id="e76162ecb5c068d6b130db8ee5211596" category="list-text"><block ref="e76162ecb5c068d6b130db8ee5211596" category="inline-link-macro-rx"></block></block>
+  <block id="a88111f39da8a7274444b588481fee26" category="list-text">VDMS si affida fortemente alle macchine virtuali Azure basate su Windows per l'hosting delle sessioni utente e delle applicazioni dei clienti.</block>
+  <block id="01296bd76cd8185c0501d04cce7a167b" category="inline-link-macro">Peering di Azure Virtual Network</block>
+  <block id="3979c7c151502e46a9cc9e3c8e0c6fcc" category="list-text"><block ref="3979c7c151502e46a9cc9e3c8e0c6fcc" category="inline-link-macro-rx"></block></block>
+  <block id="9796805885a1800afe1b14adffe2cb28" category="list-text">I sistemi VDMS possono sfruttare il peering delle reti virtuali Azure per integrarsi con il controller di dominio Active Directory (ad DC) esistente del cliente.</block>
+  <block id="1326428c52b039fd64ab59330a06ed7a" category="inline-link-macro">VPN Azure</block>
+  <block id="5f71288630df0d16ede6551b3df106ae" category="list-text"><block ref="5f71288630df0d16ede6551b3df106ae" category="inline-link-macro-rx"></block></block>
+  <block id="7d609d9814d7e154cd65f8ecdcdbe7ae" category="list-text">VDMS può sfruttare la VPN sito-sito di Azure per l'integrazione con il controller di dominio Active Directory (ad DC) esistente del cliente.</block>
+  <block id="f7896a449e94c533aa09253e7ec6a8e1" category="inline-link-macro">Desktop virtuale Windows (WVD)</block>
+  <block id="1ee7e70fb1311d3977554f6ea305af4d" category="list-text"><block ref="1ee7e70fb1311d3977554f6ea305af4d" category="inline-link-macro-rx"></block></block>
+  <block id="907dd555fc3c0afb63583fc4457f11ca" category="list-text">VDMS sfrutta la funzionalità WVD nativa per supportare il brokering delle sessioni utente, l'autenticazione, le licenze Windows e molto altro ancora.</block>
+  <block id="e1fafd2510cd146e482a585fc2356d70" category="inline-link-macro">Azure ad Connect</block>
+  <block id="47d965a1630901daa52084062865e9c6" category="list-text"><block ref="47d965a1630901daa52084062865e9c6" category="inline-link-macro-rx"></block></block>
+  <block id="d7e7636ec23a129a1ecaa66e3d557b80" category="list-text">WVD richiede che il dominio locale (ad DC) e Azure ad siano sincronizzati tramite l'applicazione Azure ad Connect.</block>
+  <block id="69e203f09b55e828d2192c6b402d4711" category="inline-link-macro">Microsoft 365 (M365)</block>
+  <block id="85a1f43f633c5b533e51cfb59f99dda6" category="list-text"><block ref="85a1f43f633c5b533e51cfb59f99dda6" category="inline-link-macro-rx"></block></block>
+  <block id="6802bf293c3a3d6a57152760479f4d42" category="list-text">Le sessioni utente WVD e Windows 10 Enterprise per gli host di sessione sono concessi in licenza all'utente tramite tipi di licenza M365 specifici. Assegnare la licenza M365 appropriata a tutti gli utenti VDMS è un requisito WVD e VDMS. Questa licenza non è inclusa in VDMS. È responsabilità del cliente e/o del provider di servizi IT gestire le licenze M365.</block>
+  <block id="6f99cee9e9c33b41b074c633b3012168" category="summary">Prerequisiti di VDMS</block>
+  <block id="7101d756d033177353d9f5c07dc1cca0" category="doc">Prerequisiti di Virtual Desktop Managed Service (VDMS)</block>
+  <block id="4ab76886debf49d95b2a4fef582d15c7" category="section-title">Licenza M365</block>
+  <block id="b020d0c9b32e382959cf0dea2bead748" category="paragraph">VDMS è costruito con la tecnologia Microsoft Windows Virtual Desktop (WVD). I prerequisiti di WVD richiedono che agli utenti finali venga assegnata una licenza specifica per Microsoft 365 (M365). Questa licenza non è inclusa nell'abbonamento a VDMS e NetApp non vende o offre in altro modo questa licenza.</block>
+  <block id="cebd22a00d5013c15eed793e240502a6" category="paragraph">La responsabilità per la conformità delle licenze M365/WVD rimane presso l'azienda del cliente, la società partner e/o il vendor M365.</block>
+  <block id="b4235b06a6f6d504c028c18cce86b2ae" category="paragraph">Esistono diversi piani M365 che supportano la licenza WVD per VDMS, i dettagli possono essere <block ref="a742b0ae6bcc16874b13b2550124fc06" category="inline-link-macro-rx"></block>.</block>
+  <block id="e2c95d84734b00e5ef2ef41173187dfd" category="section-title">Tenant ad M365/Azure</block>
+  <block id="978a5d70cc4724762885eae4edefb265" category="paragraph">Il cliente deve disporre di un tenant Azure ad esistente. Microsoft 365 si basa sulla stessa struttura di tenant ad Azure, pertanto il rispetto del requisito di licenza M365 (sopra) soddisferà anche questo requisito.</block>
+  <block id="e60603a8c091ad4ecf4f13ef038c6993" category="section-title">Rapporto con i rivenditori CSP</block>
+  <block id="97c44aa79914d250c369d31952754f92" category="paragraph">NetApp implementa VDMS in un abbonamento Azure dedicato utilizzando la nostra relazione CSP con Microsoft. Per implementare questo abbonamento, NetApp deve stabilire una relazione con il rivenditore con il tenant Azure ad del cliente. Un Global Admin per il tenant Azure ad del cliente può accettare questa relazione qui:</block>
+  <block id="76c466b535a024bf62441e55d148bff3" category="paragraph"><block ref="fa3fd739777b2eeb32cbdd79384ee355" category="inline-link-rx"></block></block>
+  <block id="28d1b9c40143d939044f58ee443457ae" category="paragraph">La funzionalità multi-partner non:</block>
+  <block id="360ea3e16d3eacc3f4c40629ffacbe0f" category="list-text">Modificare le sottoscrizioni esistenti del cliente</block>
+  <block id="8049eda9cbcf42194ddbf8e1247fef3a" category="list-text">Transizione delle sottoscrizioni o della proprietà dell'account del cliente</block>
+  <block id="31aad5340a094333d0802dc580273698" category="list-text">Modificare i termini o gli obblighi del cliente per qualsiasi abbonamento esistente</block>
+  <block id="1e95b46571474c3be681a025af16355e" category="list-text">Modificare il partner di record per un abbonamento</block>
+  <block id="01f9d9cf2c00e8e734e6317025a5a247" category="list-text">Ulteriori dettagli su questo argomento:<block ref="6684da7473eb39e0e8cae311c4c6d92e" category="inline-link-rx"></block></block>
+  <block id="0fdcf23d7c1c245aaa0e4622d9b7c2cb" category="section-title">Diritti di amministratore delegati</block>
+  <block id="b332ccf67aea6d555c7d8ac7a19d5c27" category="paragraph">Il link di invito (sopra) include una richiesta di autorizzazioni amministrative delegate. L'accettazione conferirà a NetApp Global Admin e Helpdesk Admin i ruoli nel tenant Azure ad del cliente.</block>
+  <block id="cb59dd4492601ed66800cb3e5c574545" category="section-title">Ambito della rete virtuale</block>
+  <block id="457656b9ef14bd283c9ef34d425f14b6" category="paragraph">VDMS verrà implementato su una rete virtuale in Azure. L'intervallo IP /20 utilizzato per questa rete non può sovrapporsi alle altre reti del proprio ambiente.</block>
+  <block id="2852f2aa3284e9a7c6058e6370337a56" category="paragraph">In qualsiasi scenario che aggiunga connettività di rete tra la rete virtuale VDMS e qualsiasi altra rete del cliente, la sovrapposizione con un altro intervallo IP di rete potrebbe interrompere il VDMS. Pertanto, è fondamentale che un intervallo /20 completamente inutilizzato sia dedicato a VDMS.</block>
+  <block id="3e501301e848b677583840429ef15a66" category="paragraph">L'ambito della rete /20 deve rientrare in uno dei seguenti intervalli IP:</block>
+  <block id="9a209730b7f51b3e4565ad790589fc43" category="list-text">10.0.0.0 – 10.255.255.255</block>
+  <block id="14dd7fcccb4b74ca672c297d1cb6d665" category="list-text">172.16.0.0 – 172.31.255.255</block>
+  <block id="3829ec5f29f77c5b461342b2ed779339" category="list-text">192.168.0.0 – 192.168.255.255</block>
+  <block id="5cbad71b2e52d27af79f2dcc24f0c89f" category="section-title">Implementare il foglio di lavoro VDMS</block>
+  <block id="40ecdaa6099a435c9140cf2050e6e8ab" category="paragraph">Il cliente/partner deve completare il foglio di lavoro Deploy VDMS all'indirizzo:<block ref="407da3f6a76beb163cf0094e957ae19d" category="inline-link-rx"></block></block>
+  <block id="131e28f3148ad4a6d5f7dbcc7defb415" category="section-title">Integrazione ad esistente</block>
+  <block id="9a2d2d00cc1c8fbdd604e7514b5e31f6" category="paragraph">L'integrazione di VDMS con un controller di dominio Active Directory (ad DC) esistente richiede diversi prerequisiti aggiuntivi:</block>
+  <block id="112b26ab610b8d0250bc550630221838" category="section-title">Credenziali dell'amministratore del dominio locale</block>
+  <block id="e1a9443c6e1bae566f0e44fe64344da0" category="paragraph">Per stabilire l'integrazione, è necessario un account amministratore di dominio locale con diritti domainjoin sul dominio esistente.</block>
+  <block id="67b732dc42aaffa9056d34cc477c863c" category="inline-link-macro">utility</block>
+  <block id="a25c024625e73e1fcccf495c1eda46e5" category="paragraph">WVD richiede che Azure ad sia sincronizzato con ad DC utilizzando ad Connect. Se non è già configurato, questo <block ref="fd37678176db647d7dc18b476a126816" category="inline-link-macro-rx"></block> Deve essere installato e configurato nel controller di dominio ad.</block>
+  <block id="5017caf329e32c80bdc1556087e04c9e" category="paragraph">/=== ruolo di contributore di rete per il peering VNET /=== diritti di amministrazione del dispositivo gateway locale per configurare le zone VPN /=== DNS (sono necessarie informazioni tecniche) /==== non esiste alcun dominio multiplo, gli utenti devono trovarsi nel dominio a cui si sta implementando</block>
+  <block id="2997e6a5bf6be5d5c8419a3213812536" category="summary">Aggiunta dell'accesso utente in VDMS</block>
+  <block id="d642faecdf160dfb8644fb3fa136bccb" category="doc">Aggiunta dell'accesso utente</block>
+  <block id="471f93d68756f527284bc51eaf905dd1" category="section-title">Creazione di un nuovo utente</block>
+  <block id="02c095d06a6d1cdc05103497e307bb57" category="list-text">Creare l'utente in VDS</block>
+  <block id="276e75d878376ba6611b9767ab595d74" category="list-text">Accedere all'area di lavoro, selezionare la scheda "Users &amp; Groups" (utenti e gruppi), fare clic su "Add" (Aggiungi) e selezionare "Add User" (Aggiungi utente)<block ref="01a7e13851148707d52a68eb54f00a1b" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="87220c67c72f0d298051345c32d4deac" category="list-text">Inserire le informazioni dell'utente, quindi fare clic su "Add User" (Aggiungi utente)<block ref="f9a3413134fff75f5a462338940fce3a" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="fab5c136050045c86c6dda86d966205f" category="list-text">Informare NetApp dell'utente aggiuntivo utilizzando uno dei metodi riportati di seguito</block>
+  <block id="fdc2b135d9efecb3e1f2b4fca11dd892" category="list-text">Assegnare l'utente al proprio pool di host</block>
+  <block id="ad0fbbe0d18dd45378f6ca0aa2500bb1" category="list-text">Nella scheda Users and groups (utenti e gruppi), fare clic sul gruppo di utenti collegato al pool di host. Ad esempio, il gruppo "Kift WVD Shared" è collegato al pool di host WVD Shared in VDMS. A tutti gli utenti aggiunti a "Kift WVD Shared" verrà assegnato l'accesso agli host di sessione nel pool di host "WVD Shared".<block ref="52fe872693fa4a302fecc7ac8d9409f8" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="0d81223cb2329228b3639c112f152f34" category="list-text">Fare clic sull'icona di modifica nella parte superiore destra della casella utenti, quindi fare clic su "Aggiungi utenti"<block ref="f779d10d4b5a2a12e1bbcbfb50a562cb" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="b5fa21f0eb2d8b7fe1bfd9c95e541389" category="list-text">Selezionare la casella accanto agli utenti da aggiungere, quindi fare clic su "continua"<block ref="fe8ce930c30018c2fed04664cd787039" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="6c92285fa6d3e827b198d120ea3ac674" category="inline-link-macro">qui</block>
+  <block id="2502824cec4d71acc93081cd6e05d3f4" category="list-text">Sono disponibili istruzioni più dettagliate <block ref="c8dc0d78acf8a52218aa489a7ef1ee9d" category="inline-link-macro-rx"></block></block>
+  <block id="075f4277f2f2fd3d1dfa5fe127b63805" category="list-text">Creare l'utente in Active Directory come si farebbe normalmente</block>
+  <block id="ea9a80a8ebede4b24a7ffcb37da35fcb" category="list-text">Aggiungere l'utente al gruppo Active Directory elencato nella distribuzione<block ref="3d1e494df7d4c39ad677f1ad91e61fc8" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="396f85e9c2391a975a7258e1a32ab806" category="list-text">Abilitare il cloudworkspace</block>
+  <block id="7de5351aa3f0e1c125bbc2f8aea255b0" category="summary">Assegnazione di utenti a gruppi di applicazioni in VDMS</block>
+  <block id="b2466ad5a9f0a0d7121744e68a49f844" category="doc">Assegnazione di utenti a gruppi di applicazioni</block>
+  <block id="d16c04fc5ac4514bfdfbe3a54de8e738" category="section-title">User Assignment Methodology (metodologia assegnazione utente)</block>
+  <block id="cfde6c3cf9bd451a997dbc5fd9f8d36c" category="paragraph">Gli utenti vengono assegnati a una macchina virtuale host di sessione (SHVM) tramite gruppi di sicurezza ad.</block>
+  <block id="4818e70e512f04e569bc147f99672272" category="paragraph">Per ciascun pool di host, nella scheda "Users &amp; Groups" (utenti e gruppi) dell'area di lavoro è presente un gruppo di utenti collegato.</block>
+  <block id="def81129d67404cd415cf4304789c9fa" category="paragraph">Ai gruppi di utenti viene assegnato l'ID dello spazio di lavoro (un codice univoco a 3-4 cifre per ogni area di lavoro), seguito dal nome del pool di host.</block>
+  <block id="5eeef880d45bcdffcb46dc1a185c466c" category="paragraph">Ad esempio, il gruppo "jzsx Shared Users" è collegato al pool di host Shared Users in VDMS. A tutti gli utenti aggiunti a "jzsx Shared Users" verrà assegnato l'accesso agli host di sessione nel pool di host "Shared Users".</block>
+  <block id="cad0242b88dfa70bcefc49b67f6c31b4" category="list-title">Per assegnare un utente al proprio pool di host</block>
+  <block id="b48fbb3ce7b871fcd5d57edd7197dafc" category="list-text">Passare a "Users &amp; Groups" (utenti e gruppi) all'interno dello spazio di lavoro</block>
+  <block id="8902181431f3e2dc1b5daa9240fadf23" category="list-text">Gli utenti possono essere aggiunti al gruppo modificando l'elenco utenti all'interno del gruppo.</block>
+  <block id="6c11b65ca6c64610ec3b88be316dc5a4" category="list-text">L'automazione sincronizzerà automaticamente i membri del gruppo di utenti in modo che all'utente venga concesso l'accesso al pool di host, al gruppo di applicazioni e alle applicazioni appropriati.</block>
+  <block id="e21bb10544386e99214ffb3d1f6f0e69" category="admonition">Gli utenti devono essere assegnati a un solo gruppo di applicazioni. Il tipo di pool di host (condiviso, VDI o GPU) deve corrispondere alle SKU con licenza acquistate per VDMS. Il disallineamento degli utenti e/o l'assegnazione a più gruppi di applicazioni causerà problemi di conflitto delle risorse e potrebbe avere un impatto sui colleghi che lavorano nell'ambiente.</block>
+  <block id="9daa07991ed43a576fef187952656736" category="summary">Accesso al dominio alle macchine virtuali VDMS</block>
+  <block id="602fe15b3412a0a253f98540e696d1c0" category="doc">Generare credenziali di amministratore di dominio in VDMS</block>
+  <block id="c0f2dc7167ea702651c95c23c8e2eb5a" category="section-title">Gestione degli accessi con privilegi</block>
+  <block id="d7e1a322cd93b3196ed2ce03fd02d619" category="paragraph">Agli amministratori di VDMS può essere assegnato il ruolo "approvatore PAM" che consente all'amministratore di concedere richieste PAM.</block>
+  <block id="b5e0fb09be70dfe486265719adc87d1c" category="paragraph">Le richieste PAM generano un account admin a livello di dominio da utilizzare per l'autenticazione sulle macchine virtuali VDMS quando le credenziali amministrative locali just-in-time non sono sufficienti.</block>
+  <block id="899617d12a06d268217a5883eb83b82c" category="paragraph">Qualsiasi amministratore VDMS può inviare una richiesta PAM, ma solo gli amministratori con ruolo di approvatore PAM possono approvare le richieste. Un approvatore PAM può richiedere e approvare la propria richiesta.</block>
+  <block id="aea32282c28940c6ac542b7bd62a70b3" category="section-title">Inviare una richiesta PAM</block>
+  <block id="31abc89f6fc876f29e040026e20bd6c2" category="list-title">Per inviare una richiesta PAM</block>
+  <block id="2cb738f01acc3f0c17681c8c76ab0a69" category="list-text">Accedere al nome utente admin nell'angolo in alto a destra e fare clic su "Settings" (Impostazioni)</block>
+  <block id="bd0a2a93fffc24975ba1853fa1149f5b" category="list-text">Selezionare la scheda "Richieste PAM"</block>
+  <block id="a571b504c697c594943d6e9c5c087775" category="list-text">Fare clic su "+ Aggiungi"</block>
+  <block id="5ba8e29ceed72746a18a29d6708840d0" category="list-text">Selezionare una durata dopo la quale queste credenziali scadranno</block>
+  <block id="2c1927771abff53406ba90bdea239e3f" category="list-text">Scegliere l'implementazione</block>
+  <block id="2f25a0df47ff1cf7f053a4419e8a72ff" category="list-text">Immettere un indirizzo e-mail che le credenziali possono essere fornite. Questo può essere qualsiasi indirizzo e-mail, consentendo a terze parti (ad esempio un vendor) di ottenere credenziali di dominio.</block>
+  <block id="1dbdc24971d689d0073e98af19eeb8fe" category="list-text">Inserire un numero di telefono in grado di ricevere messaggi di testo</block>
+  <block id="60aa2e4a9c8c74f16e29354ab59eee7a" category="list-text">Inserire eventuali note per i registri e per il responsabile dell'approvazione PAM da rivedere.</block>
+  <block id="5031e28239e8f60089e6ec2c48ce180e" category="list-text">Fare clic su "Add Request" (Aggiungi richiesta</block>
+  <block id="209774dd0e6ea93eb16bd5a8817c6f79" category="section-title">Approvare una richiesta PAM</block>
+  <block id="8d6292bd781be3efa75297b09327c5d2" category="list-title">Per rivedere e approvare/rifiutare una richiesta PAM</block>
+  <block id="d6d7d89a00dd2cdcfae222003e03198a" category="list-text">. Accedere al nome utente admin nell'angolo in alto a destra e fare clic su "Settings" (Impostazioni)</block>
+  <block id="1e25fde4d5df52504c3c378803f196b5" category="list-text">Selezionare la scheda "Richieste PAM" e fare clic sulla richiesta</block>
+  <block id="df08ce57f98ee9fe5ed9d38b2d6d2aeb" category="list-text">Esaminare la richiesta e fare clic su "approva" o "Rifiuta"</block>
+  <block id="004bf02cb11b8e69065a56d3e2f499e6" category="list-text">Inserire eventuali note relative alla decisione di approvazione/rifiuto</block>
+  <block id="ba1debcf140af674383a994a011f4378" category="section-title">Utilizzo delle credenziali generate da PAM</block>
+  <block id="138f0560a7d09acb7363aa3e31c607a0" category="paragraph">Una volta approvato, all'indirizzo e-mail fornito viene inviata un'e-mail di conferma per attivare le proprie credenziali:</block>
+  <block id="546d735f3a5b13a8291f291ceca54e43" category="paragraph"><block ref="546d735f3a5b13a8291f291ceca54e43" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="5455149d315bd4b66490fb089ea0b5fa" category="paragraph">Seguendo il link "Activate Request" (attiva richiesta), l'utente accede alla pagina seguente e invia un codice di conferma via SMS. Verrà inoltre richiesto di impostare una password sicura.</block>
+  <block id="08a40eb602733fda5f16835b431f8811" category="paragraph"><block ref="08a40eb602733fda5f16835b431f8811" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="9264aee8437d85fc53a0b42286f24cb4" category="paragraph">Una volta convalidato correttamente l'account, l'utente riceve una conferma con il proprio nome utente.</block>
+  <block id="4b0fe9652493940a58ca8d7a9f4c2cf3" category="paragraph"><block ref="4b0fe9652493940a58ca8d7a9f4c2cf3" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="9ea543fb4e345eb6592d75458c4cb8b9" category="summary">Landing page Getting Started per VDMS</block>
+  <block id="0f43cd3e37e1c436acacdca2fab71789" category="doc">Fasi iniziali per il successo di VDMS</block>
+  <block id="628360b99cb016f82f440ba3f28f67dd" category="section-title">Che cos'è VDMS?</block>
+  <block id="46f6eded4cddfc975ecf5b02b64628dc" category="paragraph">Virtual Desktop Managed Service (VDMS) è la soluzione DaaS gestita di NetApp che consente di esternalizzare il provisioning, l'implementazione e l'infrastruttura di desktop virtuali, consentendoti di concentrarti su utenti e applicazioni con una singola tariffa mensile per utente.</block>
+  <block id="9e8c3254392b0084af45f9288549cd6a" category="image-alt">landing.gettingstarted 3b8c5</block>
+  <block id="7e25ef1a019aa248e94eee9245e5873c" category="section-title">Configurazione di VDMS</block>
+  <block id="c675fe9704554382bdbc8e66915b32c0" category="paragraph">Il progetto di implementazione di VDMS sarà costituito dai seguenti elementi:</block>
+  <block id="ee68e5b99222bbc29a480fcb0d1d6ee2" category="inline-link-macro">Prerequisiti</block>
+  <block id="ec43c194067748b0549f1896c5e6e878" category="list-text"><block ref="ec43c194067748b0549f1896c5e6e878" category="inline-link-macro-rx"></block></block>
+  <block id="a9c7d144b19bd8fa62601d378a40ddd8" category="list-text">Kick off Call per la revisione dell'ambiente del cliente</block>
+  <block id="a6d1456f9736834bbdec181dd562a1e3" category="list-text">NetApp offre la tua infrastruttura e lo spazio di lavoro WVD</block>
+  <block id="d267f2e895454b234815f27756e8bfa3" category="list-text">Sessioni di training live interattive</block>
+  <block id="8b04ec4f75f0c22c4b6d210d421a717e" category="list-text">Aggiungi dati, applicazioni e utenti al tuo WVD personalizzato</block>
+  <block id="f883375f8137e6f142c56d7253cc6d08" category="list-text">Verificare l'ambiente, i desktop degli utenti e la connettività</block>
+  <block id="9388501b767b546557d8a759950da26f" category="list-text">Live!</block>
+  <block id="d7fc8658f9e7754760fee0f4a1678e61" category="section-title">Quali sono le prossime novità?</block>
+  <block id="55f00fa354b9aa6365e1ebf8a7b5f33b" category="paragraph">Per garantire un'implementazione corretta e tempestiva, iniziare con i passaggi riportati di seguito:</block>
+  <block id="501576b716eaba3643cdb8c08168f956" category="inline-link-macro">Licenza Microsoft 365 appropriata</block>
+  <block id="c39d5292515125e905d03aec97857354" category="list-text">Ottenere <block ref="78b612584e382737e76ece5c25add306" category="inline-link-macro-rx"></block> per i tuoi utenti</block>
+  <block id="8d99ef921e0276d963c6fb7cfa9590d4" category="list-text">Creare un elenco di utenti VDMS</block>
+  <block id="9364c02e0d2095be3c95438f4e4fd602" category="list-text">Creare un elenco di applicazioni, supporti, licenze e informazioni sui vendor. Tenere presente qualsiasi database o applicazione legacy che potrebbe richiedere considerazioni speciali o assistenza da parte del vendor</block>
+  <block id="136212e967a2e7310317674555cf610d" category="list-text">Identificare i dati che devono essere trasferiti</block>
+  <block id="7aa38ffde78f8eb2c2324c370d860825" category="inline-link-macro">prerequisiti aggiuntivi</block>
+  <block id="39c5623c1f9ec8914849d6cc41187f25" category="list-text">Se si esegue la distribuzione con un'istanza di Active Directory esistente, esaminarle <block ref="cf83f1297856ffc9b6be310d7cdeab76" category="inline-link-macro-rx"></block></block>
+  <block id="0254b4a00a794d40ac59967a8fdbee36" category="sidebar">Documentazione VDMS</block>
+  <block id="bf647454e36069fd16f1a7a35cf6a865" category="sidebar">Per iniziare</block>
+  <block id="cf1ace6c8363604069581ea6bf9184b7" category="sidebar">Riepilogo del servizio</block>
+  <block id="130ddfce9c28453883ccfe2da8b6d5ac" category="sidebar">Tutorial</block>
+  <block id="ab9cffca9a784227a73f68923d4eaa2e" category="sidebar">Installare le applicazioni</block>
+  <block id="bc3b078bb1277873f2454c615089dd7c" category="sidebar">Aggiornamento e implementazione dell'immagine della macchina virtuale</block>
+  <block id="80d4e33eb5b2f3446ea718da47a8df44" category="sidebar">Assegnare gli utenti ai gruppi di applicazioni</block>
+  <block id="be23cb36ea7e7c431648affa1db4d34b" category="sidebar">Ottenere le credenziali Domain Admin</block>
+  <block id="b2ea58473050d845231730d4a0ee13f3" category="sidebar">Aggiungi accesso utente</block>
+  <block id="731bcdce0a7b844ed7b28fc80a338f4f" category="sidebar">Rimuovi accesso utente</block>
+  <block id="f7dca0ff3aa4294b3f0d90f8edcaec5d" category="sidebar">Aggiungere/rimuovere amministratori</block>
+  <block id="063eef420fb2709abeb35146c37743ab" category="sidebar">Domande frequenti su VDMS</block>
+</blocks>

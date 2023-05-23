@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: landing.gettingstarted.html 
+summary: Landing page Getting Started per VDMS 
+keywords:  
+---
+= Fasi iniziali per il successo di VDMS
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Che cos'è VDMS?
+
+Virtual Desktop Managed Service (VDMS) è la soluzione DaaS gestita di NetApp che consente di esternalizzare il provisioning, l'implementazione e l'infrastruttura di desktop virtuali, consentendoti di concentrarti su utenti e applicazioni con una singola tariffa mensile per utente.
+
+image::landing.gettingstarted-3b8c5.png[landing.gettingstarted 3b8c5]
+
+
+
+== Configurazione di VDMS
+
+Il progetto di implementazione di VDMS sarà costituito dai seguenti elementi:
+
+. link:serviceoffering.prerequisites.html["Prerequisiti"]
+. Kick off Call per la revisione dell'ambiente del cliente
+. NetApp offre la tua infrastruttura e lo spazio di lavoro WVD
+. Sessioni di training live interattive
+. Aggiungi dati, applicazioni e utenti al tuo WVD personalizzato
+. Verificare l'ambiente, i desktop degli utenti e la connettività
+. Live!
+
+
+
+
+== Quali sono le prossime novità?
+
+Per garantire un'implementazione corretta e tempestiva, iniziare con i passaggi riportati di seguito:
+
+. Ottenere link:serviceoffering.prerequisites.html#m365-licensing["Licenza Microsoft 365 appropriata"] per i tuoi utenti
+. Creare un elenco di utenti VDMS
+. Creare un elenco di applicazioni, supporti, licenze e informazioni sui vendor. Tenere presente qualsiasi database o applicazione legacy che potrebbe richiedere considerazioni speciali o assistenza da parte del vendor
+. Identificare i dati che devono essere trasferiti
+. Se si esegue la distribuzione con un'istanza di Active Directory esistente, esaminarle link:serviceoffering.prerequisites.html#existing-ad-integration["prerequisiti aggiuntivi"]
+

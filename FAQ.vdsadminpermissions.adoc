@@ -1,0 +1,119 @@
+---
+sidebar: sidebar 
+permalink: FAQ.vdsadminpermissions.html 
+summary: Riepilogo delle autorizzazioni di amministrazione di VDS 
+keywords:  
+---
+= Autorizzazioni di amministrazione VDS
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Panoramica delle autorizzazioni di amministrazione
+
+Gli amministratori di VDMS hanno accesso limitato al portale di amministrazione di VDS. Poiché VDMS è una soluzione co-gestita, esistono set di autorizzazioni non abilitati per gli amministratori VDMS. Queste azioni sono riservate al team di supporto NetApp. Se sono necessarie azioni che non possono essere eseguite a causa di limitazioni di autorizzazione, contattare il supporto per assistenza.
+
+
+
+== Impostazioni del tipo di account
+
+All'interno dell'account amministratore di VDMS, le seguenti impostazioni sono predefinite.
+
+[cols="3*"]
+|===
+| Tipo | Valore predefinito | Note 
+
+
+| Account tecnico | Falso | Può essere modificato su richiesta al supporto NetApp. Quando questa opzione è attivata, all'amministratore vengono richieste le credenziali quando si effettua la connessione a qualsiasi macchina virtuale tramite il portale VDS. Se disattivato, admin viene autenticato automaticamente (con account admin locale generato automaticamente) quando si connette a qualsiasi macchina virtuale tenant tramite il portale VDS. Agli amministratori vengono comunque richieste le credenziali durante la connessione a qualsiasi macchina virtuale del server della piattaforma. 
+
+
+| link:administration.pam.html["Approvatore PAM"] | Vero | Può essere modificato su richiesta al supporto NetApp. Tutti i clienti devono avere almeno un account amministratore abilitato come approvatore PAM. 
+
+
+| Supporto utente | Falso | Questa funzione non si applica a VDMS. 
+
+
+| Utente shadow | Vero | Può essere modificato su richiesta al supporto NetApp. Una volta attivata, l'amministratore può connettersi alla sessione di un utente finale e vedere cosa vede per fornire supporto all'utente finale. 
+
+
+| MFA attivato | Vero | Richiede che l'accesso dell'amministratore al portale di amministrazione VDMS sia protetto mediante MFA integrato. Sono supportati i metodi SMS e/o e-mail. 
+|===
+
+
+== Autorizzazioni account amministratore
+
+All'interno dell'account amministratore di VDMS, le seguenti autorizzazioni sono predefinite.
+
+[cols="6*"]
+|===
+| Modulo | Visualizza | Modifica | Eliminare | Aggiungi | Note 
+
+
+| Amministratore | Acceso | Spento | Acceso | Spento | L'aggiunta di account admin e/o la modifica delle autorizzazioni amministrative viene gestita dal supporto NetApp. 
+
+
+| Servizi app | Spento | Spento | Spento | Spento | Il set di funzionalità di App Services non è supportato in VDMS. 
+
+
+| Applicazioni | Spento | Spento | Spento | Spento | Le funzioni delle applicazioni in VDS sono specifiche di RDS. VDMS è un servizio basato su WVD e la gestione delle applicazioni non viene gestita con questa funzione. Vedere link:mages.updateimages.html["aggiornare e implementare le immagini"] Per ulteriori informazioni sulla distribuzione delle applicazioni per VDMS. 
+
+
+| Audit | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Client | Acceso | Acceso | Spento | Spento | La creazione/rimozione del client viene gestita dal supporto NetApp. 
+
+
+| Implementazioni | Acceso | Acceso | Spento | Spento | La creazione/rimozione dell'implementazione viene gestita dal supporto NetApp. 
+
+
+| Regole firewall | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Cartelle | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Gruppi | Acceso | Acceso | Spento | Acceso | L'eliminazione dei gruppi di utenti viene gestita dal supporto NetApp. Alcuni gruppi di utenti sono obbligatori 
+
+
+| Partner | Acceso | Spento | Spento | Spento | Il set di funzionalità Partner non è supportato in VDMS. Visualizzare le autorizzazioni necessarie per visualizzare gli elenchi dei tenant. 
+
+
+| Modelli di provisioning | Acceso | Acceso | Spento | Spento | La creazione/rimozione delle immagini viene gestita dal supporto NetApp. 
+
+
+| Report | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Risorse | Acceso | Spento | Spento | Spento | Le impostazioni delle risorse vengono gestite dal supporto NetApp. 
+
+
+| Eventi con script | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Server | Acceso | Acceso | Spento | Spento | Le impostazioni di creazione/rimozione del server vengono gestite dal supporto NetApp. 
+
+
+| Scheda di servizio | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Impostazioni | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Utenti | Acceso | Acceso | Acceso | Acceso |  
+
+
+| Aree di lavoro | Acceso | Acceso | Spento | Spento | La creazione/rimozione dello spazio di lavoro viene gestita dal supporto NetApp. 
+|===

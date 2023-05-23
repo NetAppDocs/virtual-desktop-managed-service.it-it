@@ -1,0 +1,15 @@
+= Application Delivery Methodology
+:allow-uri-read: 
+
+
+
+
+== Application Delivery Methodology
+
+Gli utenti possono accedere a qualsiasi applicazione installata sulla macchina virtuale host della sessione (SHVM) in cui è in esecuzione la sessione utente.
+
+Gli utenti vengono assegnati a un pool di SHVM ("pool di host") in base alla loro appartenenza a un gruppo di utenti. Ogni SHVM in quel pool di host si basa sulla stessa immagine della macchina virtuale, ha le stesse applicazioni e viene eseguito sulle stesse risorse della macchina virtuale. Ogni volta che un utente si connette, viene assegnato a SHVM nel proprio pool di host con il minor numero di sessioni utente correnti.
+
+Aggiungendo o rimuovendo applicazioni da ogni SHVM nel pool di host, l'amministratore di VDMS può controllare a quali applicazioni gli utenti di VDMS possono accedere.
+
+L'aggiunta (o la rimozione) di applicazioni da ogni SHVM può essere eseguita direttamente su ogni SHVM o su una singola immagine della VM, che a sua volta può essere implementata in tutti gli SHVM nel pool di host.

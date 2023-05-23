@@ -1,0 +1,100 @@
+---
+sidebar: sidebar 
+permalink: serviceoffering.prerequisites.html 
+summary: Prerequisiti di VDMS 
+keywords:  
+---
+= Prerequisiti di Virtual Desktop Managed Service (VDMS)
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Licenza M365
+
+VDMS è costruito con la tecnologia Microsoft Windows Virtual Desktop (WVD). I prerequisiti di WVD richiedono che agli utenti finali venga assegnata una licenza specifica per Microsoft 365 (M365). Questa licenza non è inclusa nell'abbonamento a VDMS e NetApp non vende o offre in altro modo questa licenza.
+
+La responsabilità per la conformità delle licenze M365/WVD rimane presso l'azienda del cliente, la società partner e/o il vendor M365.
+
+Esistono diversi piani M365 che supportano la licenza WVD per VDMS, i dettagli possono essere link:https://azure.microsoft.com/en-us/pricing/details/virtual-desktop/["trovato qui"].
+
+
+
+== Tenant ad M365/Azure
+
+Il cliente deve disporre di un tenant Azure ad esistente. Microsoft 365 si basa sulla stessa struttura di tenant ad Azure, pertanto il rispetto del requisito di licenza M365 (sopra) soddisferà anche questo requisito.
+
+
+
+== Rapporto con i rivenditori CSP
+
+NetApp implementa VDMS in un abbonamento Azure dedicato utilizzando la nostra relazione CSP con Microsoft. Per implementare questo abbonamento, NetApp deve stabilire una relazione con il rivenditore con il tenant Azure ad del cliente. Un Global Admin per il tenant Azure ad del cliente può accettare questa relazione qui:
+
+https://admin.microsoft.com/Adminportal/Home?invType=ResellerRelationship&partnerId=47c1f6d2-b112-48e0-915f-4304efffb3e8&msppId=0&DAP=true#/BillingAccounts/partner-invitation[]
+
+La funzionalità multi-partner non:
+
+* Modificare le sottoscrizioni esistenti del cliente
+* Transizione delle sottoscrizioni o della proprietà dell'account del cliente
+* Modificare i termini o gli obblighi del cliente per qualsiasi abbonamento esistente
+* Modificare il partner di record per un abbonamento
+* Ulteriori dettagli su questo argomento: https://docs.microsoft.com/en-us/partner-center/multipartner[]
+
+
+
+
+=== Diritti di amministratore delegati
+
+Il link di invito (sopra) include una richiesta di autorizzazioni amministrative delegate. L'accettazione conferirà a NetApp Global Admin e Helpdesk Admin i ruoli nel tenant Azure ad del cliente.
+
+
+
+== Ambito della rete virtuale
+
+VDMS verrà implementato su una rete virtuale in Azure. L'intervallo IP /20 utilizzato per questa rete non può sovrapporsi alle altre reti del proprio ambiente.
+
+In qualsiasi scenario che aggiunga connettività di rete tra la rete virtuale VDMS e qualsiasi altra rete del cliente, la sovrapposizione con un altro intervallo IP di rete potrebbe interrompere il VDMS. Pertanto, è fondamentale che un intervallo /20 completamente inutilizzato sia dedicato a VDMS.
+
+L'ambito della rete /20 deve rientrare in uno dei seguenti intervalli IP:
+
+* 10.0.0.0 – 10.255.255.255
+* 172.16.0.0 – 172.31.255.255
+* 192.168.0.0 – 192.168.255.255
+
+
+
+
+== Implementare il foglio di lavoro VDMS
+
+Il cliente/partner deve completare il foglio di lavoro Deploy VDMS all'indirizzo:https://www.deployvdms.com/[]
+
+
+
+== Integrazione ad esistente
+
+L'integrazione di VDMS con un controller di dominio Active Directory (ad DC) esistente richiede diversi prerequisiti aggiuntivi:
+
+
+
+=== Credenziali dell'amministratore del dominio locale
+
+Per stabilire l'integrazione, è necessario un account amministratore di dominio locale con diritti domainjoin sul dominio esistente.
+
+
+
+=== Azure ad Connect
+
+WVD richiede che Azure ad sia sincronizzato con ad DC utilizzando ad Connect. Se non è già configurato, questo link:https://www.microsoft.com/en-us/download/details.aspx?id=47594["utility"] Deve essere installato e configurato nel controller di dominio ad.
+
+/=== ruolo di contributore di rete per il peering VNET /=== diritti di amministrazione del dispositivo gateway locale per configurare le zone VPN /=== DNS (sono necessarie informazioni tecniche) /==== non esiste alcun dominio multiplo, gli utenti devono trovarsi nel dominio a cui si sta implementando

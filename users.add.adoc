@@ -1,0 +1,69 @@
+---
+sidebar: sidebar 
+permalink: users.add.html 
+summary: 'Aggiunta dell"accesso utente in VDMS' 
+keywords:  
+---
+= Aggiunta dell'accesso utente
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Creazione di un nuovo utente
+
+.Nuove implementazioni di Active Directory (è stato creato un nuovo dominio Active Directory per VDMS)
+. Creare l'utente in VDS
++
+.. Accedere all'area di lavoro, selezionare la scheda "Users & Groups" (utenti e gruppi), fare clic su "Add" (Aggiungi) e selezionare "Add User" (Aggiungi utente)image:users.add01.png["900,900"]
+.. Inserire le informazioni dell'utente, quindi fare clic su "Add User" (Aggiungi utente)image:users.add02.png["900,900"]
+
+
+. Informare NetApp dell'utente aggiuntivo utilizzando uno dei metodi riportati di seguito
++
+.. Supporto via email: VDSsupport@netapp.com
+.. Assistenza telefonica: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portale di supporto VDMS"]
+
+
+. Assegnare l'utente al proprio pool di host
++
+.. Nella scheda Users and groups (utenti e gruppi), fare clic sul gruppo di utenti collegato al pool di host. Ad esempio, il gruppo "Kift WVD Shared" è collegato al pool di host WVD Shared in VDMS. A tutti gli utenti aggiunti a "Kift WVD Shared" verrà assegnato l'accesso agli host di sessione nel pool di host "WVD Shared".image:users.add03.png["900,900"]
+.. Fare clic sull'icona di modifica nella parte superiore destra della casella utenti, quindi fare clic su "Aggiungi utenti"image:users.add04.png["900,900"]
+.. Selezionare la casella accanto agli utenti da aggiungere, quindi fare clic su "continua"image:users.add05.png["900,900"]
+.. Sono disponibili istruzioni più dettagliate link:users.assigntoappgroup.html["qui"]
+
+
+
+
+.Implementazioni Active Directory esistenti (VDMS si sta connettendo a un Active Directory esistente)
+. Creare l'utente in Active Directory come si farebbe normalmente
+. Aggiungere l'utente al gruppo Active Directory elencato nella distribuzioneimage:users.add06.png["900,900"]
+. Abilitare il cloudworkspace
+. Informare NetApp dell'utente aggiuntivo utilizzando uno dei metodi riportati di seguito
++
+.. Supporto via email: VDSsupport@netapp.com
+.. Assistenza telefonica: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portale di supporto VDMS"]
+
+
+. Assegnare l'utente al proprio pool di host
++
+.. Nella scheda Users and groups (utenti e gruppi), fare clic sul gruppo di utenti collegato al pool di host. Ad esempio, il gruppo "Kift WVD Shared" è collegato al pool di host WVD Shared in VDMS. A tutti gli utenti aggiunti a "Kift WVD Shared" verrà assegnato l'accesso agli host di sessione nel pool di host "WVD Shared".image:users.add03.png["900,900"]
+.. Fare clic sull'icona di modifica nella parte superiore destra della casella utenti, quindi fare clic su "Aggiungi utenti"image:users.add04.png["900,900"]
+.. Selezionare la casella accanto agli utenti da aggiungere, quindi fare clic su "continua"image:users.add05.png["900,900"]
+.. Sono disponibili istruzioni più dettagliate link:users.assigntoappgroup.html["qui"]
+
+
+

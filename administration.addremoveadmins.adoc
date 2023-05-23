@@ -1,0 +1,63 @@
+---
+sidebar: sidebar 
+permalink: administration.addremoveadmins.html 
+summary: Aggiunta e rimozione di amministratori in VDMS 
+keywords:  
+---
+= Aggiunta e rimozione di amministratori in VDMS
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Aggiunta di amministratori in VDMS
+
+* Questo processo è gestito da NetApp
+* Contattare il supporto NetApp VDMS utilizzando uno dei metodi riportati di seguito:
++
+.. Supporto via email: VDSsupport@netapp.com
+.. Assistenza telefonica: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portale di supporto VDMS"]
+
+
+* Includere quanto segue per il nuovo account admin:
++
+.. Codice del partner
+.. Nome e cognome
+.. Indirizzo e-mail
+.. Se le autorizzazioni sono diverse dal set predefinito definito in link:FAQ.vdsadminpermissions.html["autorizzazioni di amministratore"]
+
+
+
+
+
+
+== Rimozione degli amministratori in VDMS
+
+* Questo processo è gestito dai partner
++
+.. Accedere alla scheda "Admins" (amministratori)
+.. Fare clic sui puntini Action (azione) a destra dell'amministratore che si desidera rimuovere
+.. Fare clic su "Delete" (Elimina
+.. Viene visualizzata una finestra di conferma; fare clic su "Sì, sono sicuro"image:administration.addremoveadmins01.png["900,900"]
+
+
+* In caso di domande, contatta il supporto NetApp VDMS utilizzando uno dei metodi riportati di seguito:
++
+.. Supporto via email: VDSsupport@netapp.com
+.. Assistenza telefonica: 844.645.6789
+.. link:https://cloudjumper.zendesk.com["Portale di supporto VDMS"]
+
+
+

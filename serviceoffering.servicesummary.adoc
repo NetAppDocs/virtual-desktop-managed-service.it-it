@@ -1,0 +1,134 @@
+---
+sidebar: sidebar 
+permalink: serviceoffering.servicesummary.html 
+summary: 'Riepilogo dell"offerta di servizi VDMS' 
+keywords:  
+---
+= Riepilogo del servizio Virtual Desktop Managed Service (VDMS)
+:toc: macro
+:hardbreaks:
+:toclevels: 2
+:allow-uri-read: 
+:toc: 
+:toclevels: 2
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:keywords: 
+:toc-position: content
+
+
+
+
+== Allocazione risorse utente
+
+
+NOTE: Questo articolo descrive con precisione i dettagli tecnici del servizio VDMS. I dettagli del servizio sono soggetti a modifiche e questo articolo non rappresenta una modifica o una modifica di accordi, contratti o altri accordi esistenti tra NetApp e qualsiasi cliente o partner.
+
+
+
+=== Utenti condivisi (SKU: VDMS-SUBS-SHARED-USER)
+
+Le sessioni utente condivise vengono eseguite su una macchina virtuale host di sessione (SHVM) con un massimo di 10 sessioni utente. Il numero totale di SHVM condivise allocate garantisce almeno una SHVM condivisa per ogni 10 utenti condivisi nell'ambiente.
+
+*Risorse allocate per utente condiviso:*
+
+* 8/10 di un core vCPU
+* 6.4 GB di RAM
+* 25 storage GiB
+
+
+*Dettagli tecnici SHVM condivisi:*
+
+* In genere da link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series["Esv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev4-esv4-series["Eav4"] e. link:https://docs.microsoft.com/en-us/azure/virtual-machines/eav4-easv4-series["Easv4"] Famiglie di macchine virtuali Azure.
+* Disco OS SSD standard da 128 GiB
+* Windows 10 Enterprise per Virtual Desktop
+* Profilo utente FSLogix Attached Containers
+* Storage collegato per la condivisione aziendale
+
+
+
+
+=== UTENTI VDI (SKU: VDMS-SUBS-VDI-USER)
+
+La sessione di un utente VDI viene eseguita su una macchina virtuale host di sessione dedicata (SHVM) che non ospita contemporaneamente altre sessioni utente. Il numero totale di SHVM VDI è uguale al numero totale di utenti VDI nell'ambiente.
+
+*Risorse allocate per utente VDI:*
+
+* 2 core vCPU
+* 8 GB di RAM
+* 25 storage GiB
+
+
+*Dettagli tecnici di VDI SHVM:*
+
+* In genere da link:https://docs.microsoft.com/en-us/azure/virtual-machines/dv3-dsv3-series["Dsv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/dv4-dsv4-series["Dav4"] e. link:https://docs.microsoft.com/en-us/azure/virtual-machines/dav4-dasv4-series["Dasv4"] Famiglie di macchine virtuali Azure.
+* Disco OS HDD standard da 128 GiB
+* Windows 10 Enterprise per Virtual Desktop
+* Profilo utente FSLogix Attached Containers
+* Storage collegato per la condivisione aziendale
+
+
+
+
+=== UTENTI GPU (SKU: VDMS-SUBS-GPU-USER)
+
+La sessione di un utente GPU viene eseguita su una macchina virtuale host sessione dedicata (SHVM) che non ospita contemporaneamente altre sessioni utente. Il numero totale di SHVM GPU corrisponde al numero totale di utenti GPU nell'ambiente.
+
+*Risorse allocate per utente GPU:*
+
+* 8 GIB GPU RAM
+* 25 storage GiB
+
+
+*GPU SHVM scheda tecnica:*
+
+* In genere da link:https://docs.microsoft.com/en-us/azure/virtual-machines/nvv3-series["NVv3"] e. link:https://docs.microsoft.com/en-us/azure/virtual-machines/nvv4-series["NVv4"] Famiglie di macchine virtuali Azure.
+* Disco OS HDD standard da 128 GiB
+* Windows 10 Enterprise per Virtual Desktop
+* Profilo utente FSLogix Attached Containers
+* Storage collegato per la condivisione aziendale
+
+
+
+
+== Altri SKU VDMS
+
+
+
+=== Server aziendali (SKU: VDMS-AZURE-BUSINESS-VM)
+
+Il server aziendale può essere aggiunto a un ambiente per supportare applicazioni e servizi.
+
+*Ogni macchina virtuale del server aziendale viene allocata almeno:*
+
+* 8 core vCPU
+* 64 GB di RAM
+* Disco OS SSD standard da 128 GiB
+* Windows Server 2012R2/2016/2019
+* In genere da link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series["Esv3"], link:https://docs.microsoft.com/en-us/azure/virtual-machines/ev4-esv4-series["Eav4"] e. link:https://docs.microsoft.com/en-us/azure/virtual-machines/eav4-easv4-series["Easv4"] Famiglie di macchine virtuali Azure.
+
+
+
+
+=== Storage aggiuntivo (SKU: VDMS-1 TB-STORAGE-HPRSCLR)
+
+Il _livello di storage dei dati_ è il meccanismo di storage primario per l'ambiente VDMS e viene eseguito su file Azure o Azure NetApp Files (ANF). La tecnologia di storage utilizzata è determinata dal numero totale di utenti VDMS acquistati. È possibile aggiungere capacità aggiuntiva con incrementi di 1 TiB.
+
+I profili utente, i dati utente, le condivisioni aziendali, i dati delle applicazioni e i database devono essere eseguiti da questo servizio di storage. Si consiglia di evitare di memorizzare i dati sui dischi delle macchine virtuali quando possibile.
+
+La capacità è la somma dell'allocazione per utente (25 GiB/utente) e dello storage Tibs aggiuntivo acquistato.
+
+|===
+| Metrico | link:https://docs.microsoft.com/en-us/azure/storage/files/storage-files-scale-targets#storage-account-scale-targets["File Azure GPv2"] | link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels["STANDARD ANF"] | link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-service-levels["ANF Premium"] 
+
+
+| Numero di utenti | 10-49 | 50-249 | 250+ 
+
+
+| Dimensione minima | 250 GiB | 4 TIB | 4 TIB 
+
+
+| IOPS | Fino a 1,000 | Fino a 250/TIB | Fino a 1,000/TIB 
+|===
